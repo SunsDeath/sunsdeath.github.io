@@ -29,7 +29,7 @@ header {
 
 #topbar ul li a {
 	display: block;
-	/*color: #fff; disabled for assignment reqs */
+	color: #fff;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
@@ -53,7 +53,7 @@ header {
 
 #sidebar ul li a {
 	display: block;
-	/*color: #000;  disabled for assignment reqs */
+	color: #000;
 	padding: 8px 16px;
 	text-decoration: none;
 }

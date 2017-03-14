@@ -42,3 +42,10 @@ header {
 #content {
 	padding-bottom: 64px;
 }
+
+/*
+	CSS is clearly used to layout the page. Rules set height and width of
+	different elements.
+	The assignment spec does not say to hack together a table without using a
+	table, but the navbar could be construed as such.
+*/

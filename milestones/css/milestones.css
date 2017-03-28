@@ -1,0 +1,13 @@
+.classheader, .classbody{
+	text-align: center;
+}
+
+.classheader {
+	padding: 10px;
+	background-color: lightgray;
+}
+
+.classbody {
+	padding: 50px;
+	display: none;
+}

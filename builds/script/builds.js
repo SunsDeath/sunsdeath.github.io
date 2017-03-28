@@ -1,35 +1,34 @@
-var lastOpen;
+var lastOpen
 
+//click event handler for class header divs
+//slides the associated class body div into view
+function clickHandler(id) {
+	var element = $(id)
+
+	//don't want to do anything if this body is already showing
+	if (element.is(":hidden")) {
+		if (lastOpen != null) {
+			lastOpen.slideToggle("fast")
+		}
+
+		element.slideToggle("slow")
+		lastOpen = element
+	}
+}
+
+//document ready event handler
 $(function() {
+	//set click handlers for class headers
 	$("#dkHeader").click(function(){
-		if (lastOpen != null)
-			lastOpen.slideToggle("fast");
-
-		lastOpen = $("#dkBody")
-		lastOpen.slideToggle("slow");
-	});
-
+		clickHandler("#dkBody")
+	})
 	$("#nbHeader").click(function(){
-		if (lastOpen != null)
-			lastOpen.slideToggle("fast");
-
-		lastOpen = $("#nbBody")
-		lastOpen.slideToggle("slow");
-	});
-
+		clickHandler("#nbBody")
+	})
 	$("#sorcHeader").click(function(){
-		if (lastOpen != null)
-			lastOpen.slideToggle("fast");
-
-		lastOpen = $("#sorcBody")
-		lastOpen.slideToggle("slow");
-	});
-
+		clickHandler("#sorcBody")
+	})
 	$("#templarHeader").click(function(){
-		if (lastOpen != null)
-			lastOpen.slideToggle("fast");
-
-		lastOpen = $("#templarBody")
-		lastOpen.slideToggle("slow");
-	});
-});
+		clickHandler("#templarBody")
+	})
+})

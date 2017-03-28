@@ -2,16 +2,42 @@
 <html>
 	<head>
 		<title>Sun's Death - Home</title>
-		<link rel="stylesheet" type="text/css" href="https://sunsdeath.github.io/css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="script/maiq.js"></script>
+		<script>
+			function ValidateForm() {
+				var name = document.forms["signup"]["name"].value;
+				var email = document.forms["signup"]["email"].value;
+
+				var errMsg = "";
+
+				if (name === "")
+					errMsg = errMsg + "Name is required.\n";
+				if (email.search("@") < 0)
+					errMsg = errMsg + "Email must contain an '@' character.\n";
+
+				if(errMsg === "")
+					WriteForm(name, email)
+				else
+					alert(errMsg)
+			}
+
+			function WriteForm(name, email) {
+				$("#output").text("Thank you, " + name + ". We'll send you an "
+				  + "email at " + email)
+
+				$("#form").hide()
+			}
+		</script>
 	</head>
 	<body>
 		<header id="topbar">
 			<nav>
 				<ul>
-					<li><a href="https://sunsdeath.github.io/index.html">Sun's Death</a></li>
-					<li><a href="https://sunsdeath.github.io/builds/builds.html">Builds</a></li>
+					<li><a href="index.html">Sun's Death</a></li>
+					<li><a href="builds/builds.html">Builds</a></li>
+					<li><a href="milestones/milestones.html">Milestones</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -39,10 +65,28 @@
 					</p>
 				</article>
 			</section>
+			<section id="signup">
+				<article>
+					<h3>More Information</h3>
+					<p>
+						If you would like more information about us, sign up
+						with your name and email below.
+					</p>
+				</article>
+				<form name="signup" id="form">
+					Name: <input type="text" name="name" required/><br>
+					Email: <input type="email" name="email" required/><br>
+					<input type="button" name=submit value="Submit" onclick="ValidateForm()"/>
+				</form>
+				<p id="output"></p>
+			</section>
 		</div>
 		<footer>
 			M'aiq the Liar says:
-			<p id="maiq">M'aiq has heard you need JavaScript to see his wisdom, whatever that is.</p>
+			<p id="maiq">
+				M'aiq has heard you need JavaScript to see his wisdom,
+				whatever that is.
+			</p>
 		</footer>
 	</body>
 </html>

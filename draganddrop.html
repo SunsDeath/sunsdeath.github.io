@@ -1,0 +1,120 @@
+ <!--
+    Randall Fowler
+    Week 3
+    Individual: Drag and Drop
+    04/17/17
+    PRG/282
+    Li
+-->
+<!doctype html>
+<html>
+<head>
+    <title>Drag and Drop</title>
+    <style>
+        .dragging {
+            float: left;
+            opacity: 0.25;
+            -webkit-transform: scale(0.8);
+            -moz-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            transform: scale(0.8);
+        }
+
+        .columns {
+            float: left;
+        }
+    </style>
+    <script type="text/javascript">
+        var draggingElement, numItems
+        var elements = new Array()
+        var hoverBorderStyle = "2px dashed #999"
+        var normalBorderStyle = "2px solid white"
+        var deleteCounter = 0
+
+        function handleDragStart(e) {
+            draggingElement = this
+            this.className = "dragging"
+            this.style.border = hoverBorderStyle
+        }
+
+        function handleDragEnd(e) {
+            draggingElement = null
+        }
+
+        function handleDragOver(e) {
+            if(e.preventDefault) e.preventDefault()
+            this.style.border = hoverBorderStyle
+
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.style.border = hoverBorderStyle;
+        }
+
+        function handleDragLeave(e) {
+            this.style.border = normalBorderStyle
+        }
+
+        function handleDrop(e) {
+            if(e.stopPropegation) e.stopPropagation(); // Stops some browsers from redirecting.
+            if(e.preventDefault) e.preventDefault();
+
+            if(this.id === "trash") {
+                draggingElement.style.visibility = "hidden"
+                draggingElement.style.width = "0"
+
+                this.style.border = normalBorderStyle
+                this.childNodes[0].src = "recyclebinfull.png"
+
+                deleteCounter++
+                if (deleteCounter == numItems) {
+                    document.body.innerHTML += "<input type='button' onclick='resetPage()' value='Reset'>"
+                }
+            }
+            else {
+                for (var i = 1; i < elements.length; i++) {
+                    elements[i].className = "columns"
+                    elements[i].style.border = normalBorderStyle
+                }
+            }
+        }
+
+        function element(id) { return document.getElementById(id) }
+        function resetPage() { location.reload() }
+        function init() {
+            elements.push(element("trash"), element("item1"), element("item2"), element("item3"))
+
+            for (var i = 0; i < elements.length; i++) {
+                //set event handlers
+                elements[i].addEventListener("dragstart", handleDragStart, false)
+                elements[i].addEventListener("dragend", handleDragEnd, false)
+                elements[i].addEventListener("dragover", handleDragOver, false)
+                elements[i].addEventListener("dragenter", handleDragEnter, false)
+                elements[i].addEventListener("dragleave", handleDragLeave, false)
+                elements[i].addEventListener("drop", handleDrop, false)
+
+                //eliminate jitter when border applied on drag
+                elements[i].style.border = normalBorderStyle
+
+                //num of items for the deleteCounter
+                numItems = i
+            }
+        }
+
+        window.onload = init
+    </script>
+</head>
+<body>
+    <div id="columns">
+        <!-- source: Microsoft Windows -->
+        <div class = "columns" id="trash"><img src="recyclebinempty.png" draggable="true" width="128" height="128"/></div>
+        <!-- source: Microsoft Office -->
+        <div class = "columns" id="item1"><img src="icondocx.png" draggable="true" width="128" height="128"/></div>
+        <!-- source: Microsoft Office -->
+        <div class = "columns" id="item2"><img src="iconxlsx.png" draggable="true" width="128" height="128"/></div>
+        <!-- source: Microsoft Office -->
+        <div class = "columns" id="item3"><img src="iconpptx.png" draggable="true" width="128" height="128"/></div>
+    </div>
+</body>
+</html>
